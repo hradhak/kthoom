@@ -114,8 +114,6 @@ kthoom.resetFileUploader = function() {
   });
   getElem('menu-open-local-files').addEventListener('change',
       getLocalFiles, false);
-  getElem('menu-open-google-drive').addEventListener('click',
-      kthoom.google.doDrive, false);
 }
 
 kthoom.initProgressMeter = function() {
@@ -655,8 +653,6 @@ function keyHandler(evt) {
   if (code == kthoom.Key.O) {
     getElem('menu-open-local-files-input').click();
     getElem('menu').classList.remove('opened');
-  } else if (code == kthoom.Key.G) {
-    kthoom.google.doDrive();
   } else if (code == kthoom.Key.QUESTION_MARK) {
     overlayStyle.display = 'block';
   }
