@@ -536,9 +536,18 @@ function showNextPage() {
 }
 
 function toggleToolbar() {
-  var headerDiv = getElem('header');
-  var fullscreen = /fullscreen/.test(headDiv.className);
-  headerDiv.className = (fullscreen ? '' : 'fullscreen');
+  //var headerDiv = getElem('header');
+
+  $('#header').toggle();
+
+
+  //console.log(headerDiv);
+
+  //var fullscreen = /fullscreen/.test(headerDiv.className);
+  //headerDiv.className = (fullscreen ? '' : 'fullscreen');
+  //
+  //console.log(headerDiv.className);
+
   //getElem('toolbarbutton).innerText = s?'-':'+';
   updateScale();
 }
