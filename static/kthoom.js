@@ -114,6 +114,9 @@ kthoom.resetFileUploader = function() {
   });
   getElem('menu-open-local-files').addEventListener('change',
       getLocalFiles, false);
+
+  getElem('menu-open-local-book').addEventListener('click', getRemoteFile, false);
+
 }
 
 kthoom.initProgressMeter = function() {
@@ -271,6 +274,37 @@ function getLocalFiles(evt) {
   }
 }
 
+function getRemoteFile(evt) {
+  console.log("getRemoteFile");
+
+  var xhr = new XMLHttpRequest();
+
+  xhr.open('GET', 'book', true);
+  xhr.responseType = 'arraybuffer';
+
+  console.log(xhr);
+
+  xhr.onload = function(e) {
+    var ab = new Uint8Array(this.response);
+    console.log(ab);
+    loadFromArrayBuffer(this.response);
+  };
+
+  xhr.send();
+
+  //$.ajax({
+  //  url: '/book/',
+  //  type: "GET",
+  //  dataType: "arraybuffer",
+  //  success: function(data) {
+  //    closeBook();
+  //    console.log(data);
+  //    loadFromArrayBuffer(data);
+  //  }
+  //});
+}
+
+
 function loadFromArrayBuffer(ab) {
   var start = (new Date).getTime();
   var h = new Uint8Array(ab, 0, 10);
@@ -331,6 +365,7 @@ function loadSingleBook(filename) {
   var fr = new FileReader();
   fr.onload = function() {
       var ab = fr.result;
+      console.log(ab);
       loadFromArrayBuffer(ab);
   };
   fr.readAsArrayBuffer(filename);
