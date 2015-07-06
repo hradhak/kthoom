@@ -334,6 +334,7 @@ bitjs.archive.Unzipper.prototype.getScriptFileName = function() { return 'unzip.
  * @constructor
  */
 bitjs.archive.Unrarrer = function(arrayBuffer, opt_pathToBitJS) {
+  console.log("BITJS", opt_pathToBitJS);
   bitjs.base(this, arrayBuffer, opt_pathToBitJS);
 };
 bitjs.inherits(bitjs.archive.Unrarrer, bitjs.archive.Unarchiver);

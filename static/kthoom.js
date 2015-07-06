@@ -255,6 +255,9 @@ kthoom.setProgressMeter = function(pct, opt_label) {
 // Attempts to read the files that the user has chosen.
 function getLocalFiles(evt) {
   var filelist = evt.target.files;
+
+  console.log(filelist);
+
   library.allBooks = filelist;
   library.currentBookNum = 0;
 
@@ -271,7 +274,7 @@ function getLocalFiles(evt) {
 function loadFromArrayBuffer(ab) {
   var start = (new Date).getTime();
   var h = new Uint8Array(ab, 0, 10);
-  var pathToBitJS = 'bitjs/';
+  var pathToBitJS = '/static/bitjs/';
   if (h[0] == 0x52 && h[1] == 0x61 && h[2] == 0x72 && h[3] == 0x21) { //Rar!
     unarchiver = new bitjs.archive.Unrarrer(ab, pathToBitJS);
   } else if (h[0] == 80 && h[1] == 75) { //PK (Zip)
@@ -358,6 +361,8 @@ var createURLFromArray = function(array, mimeType) {
       typeof URL.createObjectURL != 'function') {
     throw 'Browser support for Object URLs is missing';
   }
+
+  console.log("URL URL", URL.createObjectURL(blob), blob, array, mimeType);
 
   return URL.createObjectURL(blob);
 }
@@ -459,19 +464,18 @@ function setImage(url) {
     img.src = url;
   };
 }
-
-function showPreview() {
-  if (/fullscreen/.test(getElem('header').className)) {
-    getElem('header').className += ' preview';
-    setTimeout(function() {
-      getElem('header').className += ' previewout';
-      setTimeout(function() {
-        getElem('header').className = getElem('header').className.replace(
-            /previewout|preview/g, '');
-      }, 1000);
-    }, 1337);
-  }
-}
+// this doesn't seem to do anything
+//function showPreview() {
+//  console.log(/fullscreen/.test(getElem('header').className))
+//  getElem('header').className += ' preview';
+//  setTimeout(function() {
+//    getElem('header').className += ' previewout';
+//    setTimeout(function() {
+//      getElem('header').className = getElem('header').className.replace(
+//          /previewout|preview/g, '');
+//    }, 1000);
+//  }, 1337);
+//}
 
 function loadBook(bookNum) {
   if (bookNum >= 0 && bookNum < library.allBooks.length) {
